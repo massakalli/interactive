@@ -11,7 +11,6 @@
         try {
             const imageRef = ref(files, imagePath);
             imageUrl = await getDownloadURL(imageRef);
-            console.log(imageUrl);
         } catch (error) {
             console.error('Error fetching image:', error);
         }
@@ -19,7 +18,15 @@
 </script>
 
 {#if imageUrl}
-    <img src="{imageUrl}" alt = "Loaded from Firebase" style = "width:100%; height: auto; object-fit:cover" />
+    <img src="{imageUrl}" alt = "Loaded from Firebase"/>
 {:else}
     <p> Loading image...</p>
 {/if}
+
+<style>
+    img {
+        width: auto; 
+        height: 100px; 
+        object-fit: cover;
+    }
+</style>

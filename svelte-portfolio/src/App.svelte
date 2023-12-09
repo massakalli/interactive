@@ -4,13 +4,12 @@
 	for ( let i = 0; i<100; i++) {
 		let id = "A"+(i+1);
 		ids.push(id)
-		console.log(id);
 	}
 </script>
 
 <main>
 	<p>Checkout my work:</p>
-	<div class  = "grid-container">
+	<div class  = "flex-container">
 		{#each ids as thisId}
 			<div class = "photograph-container">
 				<Photograph imageId={thisId}/>
@@ -20,19 +19,24 @@
 </main>
 
 <style>
-	.grid-container {
-		display: grid;
-		grid-template-columns: repeat(auto-fill, minmax(50px, 1fr));
-        gap: 10px;
-        padding: 10px;
-        max-width: 100vw;
-        height: 100vh;
-        overflow: auto;
-
+	main {
+		background-color: black;
+	}
+	.flex-container {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 10px;
 	}
 
 	.photograph-container {
-		overflow: hidden;
+    	flex: 1;
+		transform: 0.3s ease;	
+		filter: grayscale(95%);
+	}
+	
+	.photograph-container:hover {
+		filter: grayscale(0%);
+		transform: scale(1.1); /* Increase the size of the image */
 	}
 	
 </style>
