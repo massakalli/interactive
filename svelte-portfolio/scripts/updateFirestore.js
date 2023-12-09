@@ -8,7 +8,7 @@ const content = readFileSync('keys/client_secret.json');
 const credentials = JSON.parse(content);
 
 function authorize(credentials, callback) {
-  const { client_secret, client_id, redirect_uris } = credentials.installed;
+  const { client_secret, client_id, redirect_uris } = credentials.web;
   const oAuth2Client = new google.auth.OAuth2(client_id, client_secret, redirect_uris[0]);
 
   // Check if we have previously stored a token.
@@ -26,8 +26,8 @@ admin.initializeApp({
   credential: admin.credential.cert('keys/firebase_credentials.json')
 });
 
-const db = admin.firestore();
-db.settings({ ignoreUndefinedProperties: true });
+const adminDb = admin.firestore();
+adminDb.settings({ ignoreUndefinedProperties: true });
 
 function getNewToken(oAuth2Client, callback) {
     const authUrl = oAuth2Client.generateAuthUrl({
@@ -68,7 +68,7 @@ async function transferData(auth) {
   
       if (rows.length) {
         rows.forEach((row, index) => {
-          const docRef = db.collection('artworksData').doc(`doc_${index}`);
+          const docRef = adminDb.collection('artworksData').doc(`doc_${index}`);
           const [month, year] = row[1].split('-').map(part => parseInt(part, 10));
           const date = new Date(year, month - 1);
 
