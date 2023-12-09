@@ -2,5 +2,4 @@
 /public/build/
 /keys
 package-lock.json
-# Google and Firebase secret keys
 .DS_Store

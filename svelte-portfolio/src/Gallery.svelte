@@ -1,16 +1,30 @@
 <script>
 	import Photograph from './Photograph.svelte';
+	import {hoveredId} from './store.js';
+
 	let ids = [];
 	for ( let i = 0; i<100; i++) {
 		let id = "A"+(i+1);
 		ids.push(id)
 	}
+
+	function setHoveredId(id) {
+        hoveredId.set(id);
+		console.log(hoveredId);
+    }
+
+    function clearHoveredId() {
+        hoveredId.set(null);
+    }
+
 </script>
 
 <main>
 	<div class  = "flex-container">
 		{#each ids as thisId}
-			<div class = "photograph-container">
+			<div class = "photograph-container"
+				 on:mouseenter={() => setHoveredId(thisId)}
+                 on:mouseleave={clearHoveredId}>
 				<Photograph imageId={thisId}/>
 			</div>
 		{/each}

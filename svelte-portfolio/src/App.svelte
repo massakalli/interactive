@@ -1,20 +1,21 @@
 <script>
 	import Gallery from './Gallery.svelte';
 	import Content from './animations/introText.svelte';
-	
-	import {getItems} from './firestoreData.js';
-  	import { onMount } from 'svelte';
+	import { onMount } from 'svelte';
+    import { getItems } from './firestoreData.js';
+    import { hoveredId } from './store.js';
 
-	let items = [];
-	let poem = null;
-	
-	onMount(async () => {
-		items = await getItems();
-		poem = items.find(item => item.id === 'A1');
-		console.log(poem);
-	});
+    let items = [];
+    let poem;
 
-	
+    onMount(async () => {
+        items = await getItems();
+    });
+
+    $: if ($hoveredId) {
+        poem = items.find(item => item.id === $hoveredId);
+        console.log(poem);
+    }
 
 </script>
 
