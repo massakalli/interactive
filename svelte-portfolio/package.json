@@ -20,7 +20,10 @@
     "svelte": "^3.55.0"
   },
   "dependencies": {
+    "express": "^4.18.2",
     "firebase": "^10.7.1",
+    "firebase-admin": "^12.0.0",
+    "googleapis": "^129.0.0",
     "p5": "^1.9.0",
     "sirv-cli": "^2.0.0",
     "three": "^0.159.0"

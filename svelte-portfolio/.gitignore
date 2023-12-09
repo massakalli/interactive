@@ -1,4 +1,8 @@
 /node_modules/
 /public/build/
 
+# Google and Firebase secret keys
+keys/client_secret.json
+keys/firebase_credentials.json
+
 .DS_Store
