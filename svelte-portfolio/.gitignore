@@ -1,8 +1,6 @@
 /node_modules/
 /public/build/
+/keys
 package-lock.json
 # Google and Firebase secret keys
-keys/client_secret.json
-keys/firebase_credentials.json
-keys/token.json
 .DS_Store
