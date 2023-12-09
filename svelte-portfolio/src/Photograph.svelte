@@ -3,7 +3,8 @@
     import { getDownloadURL, ref } from 'firebase/storage';
     import { onMount } from 'svelte';
 
-    export let imagePath;
+    export let imageId;
+    let imagePath = "artworksHub/"+imageId+".png";
     let imageUrl = '';
 
     onMount( async () => {
@@ -18,7 +19,7 @@
 </script>
 
 {#if imageUrl}
-    <img src="{imageUrl}" alt = "Loaded from Firebase" />
+    <img src="{imageUrl}" alt = "Loaded from Firebase" style = "width:100%; height: auto; object-fit:cover" />
 {:else}
     <p> Loading image...</p>
 {/if}
