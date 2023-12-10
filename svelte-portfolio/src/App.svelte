@@ -2,9 +2,11 @@
 	import Gallery from './Gallery.svelte';
 	import Content from './animations/introText.svelte';
 	import Photograph from './Photograph.svelte';
+	import Property from './animations/Properties.svelte'
 	import { onMount } from 'svelte';
     import { getItems } from './firestoreData.js';
     import { hoveredId } from './store.js';
+  import Properties from './animations/Properties.svelte';
 
 
     let items = [];
@@ -19,6 +21,16 @@
         console.log(hoveredItem);
     }
 
+	function formatDateToMonYY(date) {
+    const monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun",
+                        "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+    
+    let monthIndex = date.getMonth(); // getMonth() returns month from 0 (January) to 11 (December)
+    let year = date.getFullYear().toString().substr(-2); // Get last two digits of year
+
+    return `${monthNames[monthIndex]}-${year}`;
+}
+
 </script>
 
 <main>
@@ -29,8 +41,13 @@
 		<div class = "hovered-media">
 			<div class = "image-view">
 				{#if hoveredItem}
-				<Photograph imageId={hoveredItem.id} imageHeight="100%"/>
+				<Photograph imageId={hoveredItem.id} imageHeight='100%'/>
 				{/if}
+			</div>
+			<div class = "properties">
+					<Property property = "medium" />
+					<Property property = "date" />
+					<Property property = "tags" />
 			</div>
 			<div class = "content-view">
 				{#if hoveredItem}
@@ -63,14 +80,23 @@
 	}
 
 	.image-view {
-		height: 40%;
+		background-color: black;
+		height: 50%;
 		width: 100%;
 		overflow-y: hidden;
-		align-content: center;
+		display: flex;
+		justify-content: center;
+	}
+ 
+	.properties {
+		background-color: wheat;
+		display: grid;
+		width: 100%;
+		height: 10%;
 	}
 
 	.content-view {
-		height: 60%;
+		height: 40%;
 		width: 100%;
 		overflow-y: hidden;
 	}

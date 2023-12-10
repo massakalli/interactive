@@ -69,12 +69,12 @@ async function transferData(auth) {
       if (rows.length) {
         rows.forEach((row, index) => {
           const docRef = adminDb.collection('artworksData').doc(`doc_${index}`);
-          const [month, year] = row[1].split('-').map(part => parseInt(part, 10));
-          const date = new Date(year, month - 1);
+          const [date, month, year] = row[1].split('/').map(part => parseInt(part, 10));
+          const formattedDate = new Date(year, month - 1, date);
 
           docRef.set({
             id: row[0],
-            date: admin.firestore.Timestamp.fromDate(date),
+            date: admin.firestore.Timestamp.fromDate(formattedDate),
             title: row[2],
             caption: {
                text: row[3],

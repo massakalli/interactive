@@ -15,7 +15,9 @@
 
             p.draw = () => {
                 p.background(255);
-                p.text(textContent, 10, p.height / 2);
+                p.textSize(15);
+                p.textAlign(p.CENTER);
+                p.text(textContent, p.width/2, 40);
             };
         };
 

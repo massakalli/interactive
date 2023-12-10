@@ -1,4 +1,3 @@
-// Photograph.svelte
 
 <script>
     import { files } from './firebase.js';
@@ -24,16 +23,8 @@
 </script>
 
 {#if imageUrl}
-    <img src="{imageUrl}" alt="Loaded from Firebase">
+    <img src="{imageUrl}" alt="Loaded from Firebase"  style = "width: auto; height: {imageHeight}; object-fit: cover;">
 {:else}
-    <p>Loading image...</p>
+    <p>Text Only.</p>
 {/if}
 
-
-<style>
-    img {
-        width: auto; 
-        height: {imageHeight}; 
-        object-fit: cover;
-    }
-</style>

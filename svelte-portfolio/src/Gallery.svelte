@@ -24,7 +24,7 @@
 			<div class = "photograph-container"
 				 on:mouseenter={() => setHoveredId(thisId)}
                  on:mouseleave={clearHoveredId}>
-				<Photograph imageId={thisId} imageHeight="100px"/>
+				<Photograph imageId={thisId} imageHeight='100px'/>
 			</div>
 		{/each}
 	</div>
@@ -32,7 +32,7 @@
 
 <style>
 	main {
-		background-color: black;
+		background-color: silver;
 	}
 	.flex-container {
 		display: flex;
@@ -49,6 +49,7 @@
 	.photograph-container:hover {
 		filter: grayscale(0%) blur(0px);
 		transform: scale(1.1); /* Increase the size of the image */
+		box-shadow: 3px 3px 7px 0px rgba(0, 0, 0, 0.5);
 	}
 	
 </style>
