@@ -1,32 +1,39 @@
+// Photograph.svelte
+
 <script>
     import { files } from './firebase.js';
     import { getDownloadURL, ref } from 'firebase/storage';
-    import { onMount } from 'svelte';
 
     export let imageId;
-    let imagePath = "artworksHub/"+imageId+".png";
+    export let imageHeight;
     let imageUrl = '';
 
-    onMount( async () => {
+    $: imagePath = `artworksHub/${imageId}.png`;
+    $: if (imageId) {
+        fetchImageUrl(imagePath);
+    }
+
+    async function fetchImageUrl(path) {
         try {
-            const imageRef = ref(files, imagePath);
+            const imageRef = ref(files, path);
             imageUrl = await getDownloadURL(imageRef);
         } catch (error) {
             console.error('Error fetching image:', error);
         }
-    });
+    }
 </script>
 
 {#if imageUrl}
-    <img src="{imageUrl}" alt = "Loaded from Firebase"/>
+    <img src="{imageUrl}" alt="Loaded from Firebase">
 {:else}
-    <p> Loading image...</p>
+    <p>Loading image...</p>
 {/if}
+
 
 <style>
     img {
         width: auto; 
-        height: 100px; 
+        height: {imageHeight}; 
         object-fit: cover;
     }
 </style>

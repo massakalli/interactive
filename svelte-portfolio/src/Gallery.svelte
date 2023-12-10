@@ -10,7 +10,6 @@
 
 	function setHoveredId(id) {
         hoveredId.set(id);
-		console.log(hoveredId);
     }
 
     function clearHoveredId() {
@@ -25,7 +24,7 @@
 			<div class = "photograph-container"
 				 on:mouseenter={() => setHoveredId(thisId)}
                  on:mouseleave={clearHoveredId}>
-				<Photograph imageId={thisId}/>
+				<Photograph imageId={thisId} imageHeight="100px"/>
 			</div>
 		{/each}
 	</div>

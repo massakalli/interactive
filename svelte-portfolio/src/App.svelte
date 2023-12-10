@@ -1,20 +1,22 @@
 <script>
 	import Gallery from './Gallery.svelte';
 	import Content from './animations/introText.svelte';
+	import Photograph from './Photograph.svelte';
 	import { onMount } from 'svelte';
     import { getItems } from './firestoreData.js';
     import { hoveredId } from './store.js';
 
+
     let items = [];
-    let poem;
+    let hoveredItem;
 
     onMount(async () => {
         items = await getItems();
     });
 
     $: if ($hoveredId) {
-        poem = items.find(item => item.id === $hoveredId);
-        console.log(poem);
+        hoveredItem = items.find(item => item.id === $hoveredId);
+        console.log(hoveredItem);
     }
 
 </script>
@@ -24,31 +26,52 @@
 		<div class = "gallery-view">
 			<Gallery />
 		</div>
-		<div class = "content-view">
-			{#if poem}
-			<Content textContent = {poem.caption.text} size = 4 />
-			{/if}
+		<div class = "hovered-media">
+			<div class = "image-view">
+				{#if hoveredItem}
+				<Photograph imageId={hoveredItem.id} imageHeight="100%"/>
+				{/if}
+			</div>
+			<div class = "content-view">
+				{#if hoveredItem}
+				<Content textContent = {hoveredItem.caption.text}/>
+				{/if}
+			</div>
 		</div>
+		
 	</div>
 </main>
 
 <style>
 	.exhibit-view {
+		width: 100vw;
 		display: flex;
-		height:100vh
+		height: 100vh;
 	}
 
 	.gallery-view {
-		width: 65vw;
+		width: 45vw;
 		overflow-y: auto;
-		height: 100vh
+		height: 100vh;
 	}
 
-	.content-view{
-		width: 35vw;
+	.hovered-media {
+		display: flex;
+		flex-direction: column;
+		width: 55vw;
 		height: 100vh;
-		overflow-y: hidden
+	}
+
+	.image-view {
+		height: 40%;
+		width: 100%;
+		overflow-y: hidden;
+		align-content: center;
+	}
+
+	.content-view {
+		height: 60%;
+		width: 100%;
+		overflow-y: hidden;
 	}
 </style>
-
-
